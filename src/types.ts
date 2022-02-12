@@ -6,10 +6,22 @@ export enum Action {
 
 export type Ref = `@${string}/${string}`;
 
-export interface Change {
-  type: Action;
-  resourceId: string;
+interface CreateOrUpdateChange {
+  op: Action.Create | Action.Update;
+  object: string;
+  parentId?: Ref | string;
+  targetId?: string;
+  body: any;
 }
+
+export interface RemoveChange {
+  op: Action.Remove;
+  object: string;
+  parentId?: string;
+  targetId: string;
+}
+
+export type Change = CreateOrUpdateChange | RemoveChange;
 
 export enum MessageType {
   Heading,
