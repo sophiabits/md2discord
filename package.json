@@ -1,0 +1,35 @@
+{
+  "name": "md2disc",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "yarn clean && tsc",
+    "clean": "rimraf dist",
+    "start:dev": "ts-node ./src/index.ts"
+  },
+  "author": {
+    "name": "Sophia Willows",
+    "email": "sophia.willows@hey.com",
+    "url": "https://sophiabits.com"
+  },
+  "bugs": "https://github.com/sophiabits/md2discord/issues",
+  "repository": "github:sophiabits/md2discord",
+  "dependencies": {
+    "@discordjs/rest": "^0.2.0-canary.0",
+    "discord-api-types": "^0.26.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/uuid": "^8.3.4",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ]
+}
