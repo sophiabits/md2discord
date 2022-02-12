@@ -1,11 +1,15 @@
 import { MdMessage, MessageType } from '../types';
 
+import uniqueId from '../lib/uniqueId';
+
 interface MessageConstructorParams {
   type: MessageType;
   children: string;
 }
 
 export default class Message implements MdMessage {
+  public id = uniqueId('message');
+
   public type!: MessageType;
   public children!: string;
 

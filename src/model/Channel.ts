@@ -2,6 +2,8 @@ import frontmatter from 'frontmatter';
 
 import { MdChannel, MdMessage, MessageType } from '../types';
 
+import uniqueId from '../lib/uniqueId';
+
 import Message from './Message';
 
 interface ChannelConstructorParams {
@@ -11,6 +13,8 @@ interface ChannelConstructorParams {
 }
 
 export default class Channel implements MdChannel {
+  public id = uniqueId('channel');
+
   public description!: string;
   public title!: string;
   public children!: MdMessage[];
