@@ -33,7 +33,7 @@ export default class Discord {
     this.guildId = guildId;
     this.rest = new REST({ version: '9' }).setToken(apiToken);
 
-    this._channels = this.get<APIChannel[]>(Routes.guildChannels(guildId));
+    this.refetchChannels();
   }
 
   async createChannel(params: CreateChannelParams) {
@@ -44,12 +44,18 @@ export default class Discord {
         topic: params.description,
         type: params.type,
       },
+    }).then((channel) => {
+      this.refetchChannels();
+      return channel;
     });
   }
 
   async updateChannel(params: UpdateChannelParams) {
     return this.patch<APIChannel>(Routes.channel(params.id), {
       body: { parent_id: params.parent, topic: params.description },
+    }).then((channel) => {
+      this.refetchChannels();
+      return channel;
     });
   }
 
@@ -102,6 +108,10 @@ export default class Discord {
 
     messages.reverse();
     return messages;
+  }
+
+  private refetchChannels() {
+    this._channels = this.get<APIChannel[]>(Routes.guildChannels(this.guildId));
   }
 
   // Thin wrappers around `@discordjs/rest`. The default Discord client
