@@ -3,12 +3,14 @@ import { REST, RequestData } from '@discordjs/rest';
 
 interface CreateChannelParams {
   name: string;
+  description?: string;
   parent?: string;
   type: number;
 }
 
 interface UpdateChannelParams {
   id: string;
+  description?: string;
   parent?: string;
 }
 
@@ -36,13 +38,18 @@ export default class Discord {
 
   async createChannel(params: CreateChannelParams) {
     return this.post<APIChannel>(Routes.guildChannels(this.guildId), {
-      body: { name: params.name, parent_id: params.parent, type: params.type },
+      body: {
+        name: params.name,
+        parent_id: params.parent,
+        topic: params.description,
+        type: params.type,
+      },
     });
   }
 
   async updateChannel(params: UpdateChannelParams) {
     return this.patch<APIChannel>(Routes.channel(params.id), {
-      body: { parent_id: params.parent },
+      body: { parent_id: params.parent, topic: params.description },
     });
   }
 
