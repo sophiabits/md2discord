@@ -22,6 +22,7 @@ export interface MdCategory {
 
 export interface MdChannel {
   children: MdMessage[];
+  description: string;
   title: string;
 }
 

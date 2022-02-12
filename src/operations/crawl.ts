@@ -3,7 +3,6 @@ import path from 'path';
 
 import Category from '../model/Category';
 import Channel from '../model/Channel';
-import Message from '../model/Message';
 
 import type { MdCategory } from '../types';
 
@@ -21,10 +20,7 @@ export default async function crawl(opts: CrawlOptions): Promise<MdCategory[]> {
         filePaths.map(async (filePath): Promise<Channel> => {
           const content = await fs.promises.readFile(filePath, { encoding: 'utf-8' });
 
-          return new Channel({
-            children: Message.parse(content),
-            title: getFileName(filePath),
-          });
+          return Channel.from(getFileName(filePath), content);
         }),
       );
 

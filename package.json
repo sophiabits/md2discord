@@ -19,9 +19,11 @@
   "dependencies": {
     "@discordjs/rest": "^0.2.0-canary.0",
     "discord-api-types": "^0.26.1",
+    "frontmatter": "^0.0.3",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/node": "^17.0.17",
     "@types/uuid": "^8.3.4",
     "rimraf": "^3.0.2",
     "ts-node": "^10.4.0",
