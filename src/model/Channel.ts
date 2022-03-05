@@ -1,6 +1,6 @@
-import frontmatter from 'frontmatter';
+import frontmatter from 'front-matter';
 
-import { MdChannel, MdMessage, MessageType } from '../types';
+import { MdChannel, MdMatter, MdMessage, MessageType } from '../types';
 
 import uniqueId from '../lib/uniqueId';
 
@@ -25,9 +25,9 @@ export default class Channel implements MdChannel {
 
   /** Parses a markdown string into a Channel */
   static from(title: string, content: string): Channel {
-    const matter = frontmatter(content);
+    const matter = frontmatter<MdMatter>(content);
 
-    const lines = matter.content.split('\n');
+    const lines = matter.body.split('\n');
     const messages: Message[] = [];
 
     // Keeps track of current message content
@@ -75,7 +75,7 @@ export default class Channel implements MdChannel {
 
     return new Channel({
       title,
-      description: matter.data?.description || '',
+      description: matter.attributes?.description || '',
       children: messages,
     });
   }

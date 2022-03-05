@@ -42,6 +42,14 @@ export interface MdChannel {
   title: string;
 }
 
+/**
+ * Type which represents (optional) frontmatter metadata which can be
+ * specified inside a Markdown document.
+ */
+export interface MdMatter {
+  description?: string;
+}
+
 export interface MdMessage {
   id: Ref;
   type: MessageType;
