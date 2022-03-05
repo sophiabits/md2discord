@@ -48,11 +48,22 @@ export default async function reconcile(opts: ReconcileOptions) {
 async function reconcileCategory(discord: Discord, category: Category, changes: Change[]) {
   const cachedApiCategory = await discord.findChannelByName(category.title);
 
-  if (!cachedApiCategory) {
+  if (cachedApiCategory) {
+    changes.push({
+      op: Action.Update,
+      object: 'category',
+      body: category,
+
+      ref: category.id,
+      targetId: cachedApiCategory.id,
+    });
+  } else {
     changes.push({
       op: Action.Create,
       object: 'category',
       body: category,
+
+      ref: category.id,
     });
   }
 }
@@ -72,8 +83,9 @@ async function reconcileChannel(
       object: 'channel',
       body: channel,
 
-      targetId: cachedApiChannel.id,
       parentId: parent.id,
+      ref: channel.id,
+      targetId: cachedApiChannel.id,
     });
   } else {
     changes.push({
@@ -82,6 +94,7 @@ async function reconcileChannel(
       body: channel,
 
       parentId: parent.id,
+      ref: channel.id,
     });
   }
 }
@@ -97,16 +110,20 @@ async function reconcileMessages(
       changes.push({
         op: Action.Update,
         object: 'message',
-        parentId: parent.id,
-        targetId: current[index].id,
         body: message,
+
+        parentId: parent.id,
+        ref: message.id,
+        targetId: current[index].id,
       });
     } else {
       changes.push({
         op: Action.Create,
         object: 'message',
-        parentId: parent.id,
         body: message,
+
+        parentId: parent.id,
+        ref: message.id,
       });
     }
   });
@@ -116,6 +133,7 @@ async function reconcileMessages(
     changes.push({
       op: Action.Remove,
       object: 'message',
+
       parentId: parent.id,
       targetId: current[i].id,
     });

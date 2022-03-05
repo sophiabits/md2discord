@@ -19,7 +19,6 @@ interface CreateMessageParams {
 }
 
 interface UpdateMessageParams {
-  id: string;
   content: string;
 }
 
@@ -48,6 +47,11 @@ export default class Discord {
       this.refetchChannels();
       return channel;
     });
+  }
+
+  async deleteChannel(channelId: string) {
+    await this.delete(Routes.channel(channelId));
+    this.refetchChannels();
   }
 
   async updateChannel(params: UpdateChannelParams) {
@@ -80,7 +84,7 @@ export default class Discord {
   }
 
   async updateMessage(channelId: string, messageId: string, params: UpdateMessageParams) {
-    return this.patch<APIMessage>(Routes.channelMessages(channelId), {
+    return this.patch<APIMessage>(Routes.channelMessage(channelId, messageId), {
       body: params,
     });
   }
