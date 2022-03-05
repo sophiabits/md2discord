@@ -1,7 +1,7 @@
 export enum Action {
-  Create,
-  Update,
-  Remove,
+  Create = 'Create',
+  Update = 'Update',
+  Remove = 'Remove',
 }
 
 export type Ref = `@${string}/${string}`;
@@ -24,9 +24,9 @@ export interface RemoveChange {
 export type Change = CreateOrUpdateChange | RemoveChange;
 
 export enum MessageType {
-  Heading,
-  Subheading,
-  Body,
+  Heading = 'Heading',
+  Subheading = 'Subheading',
+  Body = 'Body',
 }
 
 export interface MdCategory {
