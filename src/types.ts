@@ -11,7 +11,7 @@ export enum DiscordChannelType {
   Text = 0,
 }
 
-interface CreateChange {
+export interface CreateChange {
   op: Action.Create;
   object: string;
 
@@ -21,7 +21,7 @@ interface CreateChange {
   ref: Ref;
 }
 
-interface UpdateChange {
+export interface UpdateChange {
   op: Action.Update;
   object: string;
 

@@ -21,10 +21,12 @@
     "@discordjs/rest": "^0.2.0-canary.0",
     "discord-api-types": "^0.26.1",
     "front-matter": "^4.0.2",
+    "lodash": "^4.17.21",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
+    "@types/lodash": "^4.14.179",
     "@types/node": "^17.0.17",
     "@types/uuid": "^8.3.4",
     "dotenv": "^16.0.0",
