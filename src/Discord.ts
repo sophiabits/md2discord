@@ -1,4 +1,4 @@
-import { APIChannel, APIMessage, Routes } from 'discord-api-types/v9';
+import { APIChannel, APIEmbed, APIMessage, Routes } from 'discord-api-types/v9';
 import { REST, RequestData } from '@discordjs/rest';
 
 interface CreateChannelParams {
@@ -15,7 +15,8 @@ interface UpdateChannelParams {
 }
 
 interface CreateMessageParams {
-  content: string;
+  content?: string;
+  embeds?: APIEmbed[];
 }
 
 interface UpdateMessageParams {
