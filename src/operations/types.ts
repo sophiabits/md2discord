@@ -16,4 +16,5 @@ export interface ReconcileOptions extends RemoteOperationOptions {
 
 export interface DeployOptions extends RemoteOperationOptions {
   changes: Change[];
+  guildId: string;
 }
